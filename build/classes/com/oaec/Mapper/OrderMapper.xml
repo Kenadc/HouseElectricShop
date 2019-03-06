@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oaec.Mapper.OrderMapper">
+	<insert id="insert" parameterType="Order">
+		insert into orderinfo(
+		`id`,
+		`order_id`,
+		`payment`,
+		`payment_type`,
+		`post_free`,
+		`type`,
+		`create_time`,
+		`update_time`,
+		`payment_time`,
+		`consign_time`,
+		`end_time`,
+		`close_time`,
+		`shipping_name`,
+		`shipping_code`,
+		`buyer_message`,
+		`buyer_rate`,
+		`user_id`
+		)
+		values(
+		#{id},
+		#{order_id},
+		#{payment},
+		#{payment_type},
+		#{post_free},
+		#{type},
+		#{create_time},
+		#{update_time},
+		#{payment_time},
+		#{consign_time},
+		#{end_time},
+		#{close_time},
+		#{shipping_name},
+		#{shipping_code},
+		#{buyer_message},
+		#{buyer_rate},
+		#{user_id}
+		)
+	</insert>
+	<select id="findByOrderId" parameterType="order" resultType="Order">
+		select * from orderinfo where order_id=#{order_id}
+	</select>
+	<select id="findByUserId" parameterType="java.lang.String" resultType="Order">
+		select * from orderinfo where user_id = #{userid}
+		<!-- <if test="user_id!=null">
+			<where>
+				user_id = #{userid}
+			</where>
+		</if> -->
+	</select>
+	<!-- <update id="update" parameterType="user">
+	    update userinfo
+	    <set>
+	      <if test="nickName != null">
+	        code = #{code},
+	      </if>
+	      <if test="password != null">
+	        password = #{password},
+	      </if>
+	      <if test="sex != null">
+	        salt = #{salt},
+	      </if>
+	      <if test="userType != null">
+	        name = #{name},
+	      </if>
+	      <if test="birthday != null">
+	        idcard = #{idcard},
+	      </if>
+	      <if test="idCard != null">
+	        sex = #{sex},
+	      </if>
+	      <if test="realName != null">
+	        birthday = #{birthday},
+	      </if>
+	      <if test="constellaId != null">
+	        province = #{province},
+	      </if>
+	      <if test="liveAddress != null">
+	        city = #{city},
+	      </if>
+	      <if test="homeAddress != null">
+	        county = #{county},
+	      </if>
+	      <if test="headUrl != null">
+	        address = #{address},
+	      </if>
+	      <if test="hobbyId != null">
+	        tel = #{tel},
+	      </if>
+	      <if test="tel != null">
+	        qqcode = #{qqcode},
+	      </if>
+	    </set>
+	    where id = #{id}
+	  </update>
+	<select id="findByOne" parameterType="user" resultType="User">
+		select * from userinfo
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+			<if test="password != null">
+				and password=#{password}
+			</if>
+		</where>
+	</select>
+	<select id="findByNickName" parameterType="user" resultType="int">
+		select count(*) from userinfo
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+		</where>
+	</select>
+	<select id="findByNickNameObj" parameterType="user" resultType="User">
+		select * from userinfo
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+		</where>
+	</select>
+	<select id="findList" resultType="User">
+		select * from userinfo
+	</select> -->
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oaec.Mapper.ProductCarMapper">
+	<insert id="insert" parameterType="ProductCar">
+		insert into product_car(
+		`id`,
+		`user_id`,
+		`product_id`,
+		`product_num`
+		)
+		values(
+		#{id},
+		#{user_id},
+		#{product_id},
+		#{product_num}
+		)
+	</insert>
+	<select id="listByProductId" parameterType="java.lang.String"
+		resultType="ProductCar">
+		select * from product_car where user_id=#{user_id}
+	</select>
+	<delete id="deleteById" parameterType="ProductCar">
+	    delete from product_car where id = #{id}
+	  </delete>
+</mapper>

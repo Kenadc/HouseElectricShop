@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oaec.Mapper.ProductStatisticsMapper">
+	<insert id="insert" parameterType="ProductStatistics">
+		insert into product_statistics(
+		`id`,
+		`product_id`,
+		`visit_count`,
+		`reply_count`,
+		`sale_quantity`,
+		`sale_amount`,
+		`purchase_quantity`,
+		`purchase_amount`,
+		`cost_price`,
+		`createTime`
+		)
+		values(
+		#{id},
+		#{product_id},
+		#{visit_count},
+		#{reply_count},
+		#{sale_quantity},
+		#{sale_amount},
+		#{purchase_quantity},
+		#{purchase_amount},
+		#{cost_price},
+		#{createTime}
+		)
+	</insert>
+	<select id="listByProductId" parameterType="java.lang.String"
+		resultType="ProductStatistics">
+		select * from product_statistics where
+		product_id=#{product_id} and to_days(createTime) = to_days(now())
+	</select>
+	<select id="listsByProductId" parameterType="java.lang.String"
+		resultType="ProductStatistics">
+		select * from product_statistics where
+		product_id=#{product_id}
+	</select>
+	<select id="lastDBByProductId" parameterType="java.lang.String"
+		resultType="ProductStatistics">
+		select * from product_statistics where createTime=(select max(createTime) from product_statistics where product_id=product_id)
+	</select>
+	<update id="updateById" parameterType="ProductStatistics">
+	    update product_statistics 
+	    <set>
+	      <if test="visit_count != null">
+	        visit_count = #{visit_count},
+	      </if>
+	      <if test="reply_count != null">
+	        reply_count = #{reply_count},
+	      </if>
+	      <if test="sale_quantity != null">
+	        sale_quantity = #{sale_quantity},
+	      </if>
+	      <if test="sale_amount != null">
+	        sale_amount = #{sale_amount},
+	      </if>
+	    </set>
+	    where product_id = #{product_id}
+	  </update>
+</mapper>

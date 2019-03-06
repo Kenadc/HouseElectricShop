@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oaec.Mapper.userMapper">
+	<insert id="insert" parameterType="User">
+		insert into userinfo(
+		`id`,
+		`nickName`,
+		`password`,
+		`sex`,
+		`userType`,
+		`birthday`,
+		`idCard`,
+		`realName`,
+		`constellaId`,
+		`liveAddress`,
+		`homeAddress`,
+		`headUrl`,
+		`hobbyId`,
+		`tel`,
+		`email`
+		)
+		values(
+		#{id},
+		#{nickName},
+		#{password},
+		#{sex},
+		#{userType},
+		#{birthday},
+		#{idCard},
+		#{realName},
+		#{constellaId},
+		#{liveAddress},
+		#{homeAddress},
+		#{headUrl},
+		#{hobbyId},
+		#{tel},
+		#{email}
+		)
+	</insert>
+	<update id="update" parameterType="user">
+	    update userinfo 
+	    <set>
+	      <if test="nickName != null">
+	        nickName = #{nickName},
+	      </if>
+	      <if test="password != null">
+	        password = #{password},
+	      </if>
+	      <if test="sex != null">
+	        sex = #{sex},
+	      </if>
+	      <if test="userType != null">
+	        userType = #{userType},
+	      </if>
+	      <if test="birthday != null">
+	        birthday = #{birthday},
+	      </if>
+	      <if test="idCard != null">
+	        idCard = #{idCard},
+	      </if>
+	      <if test="realName != null">
+	        realName = #{realName},
+	      </if>
+	      <if test="constellaId != null">
+	        constellaId = #{constellaId},
+	      </if>
+	      <if test="liveAddress != null">
+	        liveAddress = #{liveAddress},
+	      </if>
+	      <if test="homeAddress != null">
+	        homeAddress = #{homeAddress},
+	      </if>
+	      <if test="headUrl != null">
+	        headUrl = #{headUrl},
+	      </if>
+	      <if test="hobbyId != null">
+	        hobbyId = #{hobbyId},
+	      </if>
+	      <if test="tel != null">
+	        tel = #{tel},
+	      </if>
+	      <if test="email != null">
+	        email = #{email},
+	      </if>
+	    </set>
+	    where id = #{id}
+	  </update>
+	  <update id="updateByTel" parameterType="user">
+	    update userinfo set password = #{password} where tel = #{tel}
+	  </update>
+	<select id="findByOne" parameterType="user" resultType="User">
+		select * from userinfo 
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+			<if test="password != null">
+				and password=#{password}
+			</if>
+			<if test="userStatus != null">
+				and userStatus=#{userStatus}
+			</if>
+		</where>
+	</select>
+	<select id="findOneById" parameterType="java.lang.String" resultType="User">
+		select * from userinfo where id=#{id}
+	</select>
+	
+	<select id="findByNickName" parameterType="user" resultType="int">
+		select count(*) from userinfo
+		<where>
+			<if test="nickName != null">
+				and nickName=#{nickName}
+			</if>
+		</where>
+	</select>
+	<select id="findByTel" parameterType="user" resultType="int">
+		select count(*) from userinfo where tel=#{tel}
+	</select>
+	<select id="findByNickNameObj" parameterType="user" resultType="User">
+		select * from userinfo
+		<where>
+			<if test="nickName != null">
+				nickName=#{nickName}
+			</if>
+			<if test="tel != null">
+				tel=#{tel}
+			</if>
+		</where>
+	</select>
+	<select id="findList" resultType="User">
+		select * from userinfo
+	</select>
+</mapper>

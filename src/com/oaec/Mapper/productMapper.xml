@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oaec.Mapper.productMapper">
+	<insert id="insert" parameterType="Product">
+		insert into product(
+		`id`,
+		`name`,
+		`price`,
+		`market_price`,
+		`cost_price`,
+		`integral`,
+		`status`,
+		`createTime`,
+		`brand`,
+		`category_id`,
+		`type_id`,
+		`marque`,
+		`func`,
+		`hotSpots`,
+		`kitApp`,
+		`user_id`
+		)
+		values(
+		#{id},
+		#{name},
+		#{price},
+		#{market_price},
+		#{cost_price},
+		#{integral},
+		#{status},
+		#{createTime},
+		#{brand},
+		#{category_id},
+		#{type_id},
+		#{marque},
+		#{func},
+		#{hotSpots},
+		#{kitApp},
+		#{user_id}
+		)
+	</insert>
+	<select id="findById" parameterType="product" resultType="Product">
+		select * from product where id=#{id}
+	</select>
+	<select id="findByPrice1" resultType="Product">
+		select p.* from product p where p.price between 0 and 1000
+	</select>
+	<select id="findByPrice2" resultType="Product">
+		select p.* from product p where p.price between 1000 and 2000
+	</select>
+	<select id="findByPrice3" resultType="Product">
+		select p.* from product p where p.price between 2000 and 3000
+	</select>
+	<select id="findByPrice4" resultType="Product">
+		select p.* from product p where p.price between 3000 and 4000
+	</select>
+	<select id="findByPrice5" resultType="Product">
+		select p.* from product p where p.price between 4000 and 5000
+	</select>
+	<select id="findByPrice6" resultType="Product">
+		select p.* from product p where p.price >= 5000
+	</select>
+	<select id="list" parameterType="product" resultType="Product">
+		select * from product
+		<where>
+			<if test="name != null">
+				and name LIKE '%' #{name} '%'
+			</if>
+			<if test="brand != null">
+				and brand LIKE '%' #{brand} '%'
+			</if>
+			<if test="func != null">
+				and func LIKE '%' #{func} '%'
+			</if>
+			<if test="hotSpots != null">
+				and hotSpots LIKE '%' #{hotSpots} '%'
+			</if>
+			<if test="type_id != null">
+				and type_id = #{type_id}
+			</if>
+			<if test="kitApp != null">
+				and kitApp=#{kitApp}
+			</if>
+			<if test="status != null">
+				and status=#{status}
+			</if>
+			<if test="productStatus != null">
+				and productStatus=#{productStatus}
+			</if>
+		</where>
+	</select>
+	<select id="listDescPrice" parameterType="product" resultType="Product">
+		select * from product
+		<where>
+			<if test="name != null">
+				and name LIKE '%' #{name} '%'
+			</if>
+			<if test="brand != null">
+				and brand LIKE '%' #{brand} '%'
+			</if>
+			<if test="func != null">
+				and func LIKE '%' #{func} '%'
+			</if>
+			<if test="hotSpots != null">
+				and hotSpots LIKE '%' #{hotSpots} '%'
+			</if>
+			<if test="type_id != null">
+				and type_id = #{type_id}
+			</if>
+			<if test="kitApp != null">
+				and kitApp=#{kitApp}
+			</if>
+			<if test="status != null">
+				and status=#{status}
+			</if>
+			<if test="productStatus != null">
+				and productStatus=#{productStatus}
+			</if>
+		</where>
+		order by price desc
+	</select>
+	<select id="listAscPrice" parameterType="product" resultType="Product">
+		select * from product
+		<where>
+			<if test="name != null">
+				and name LIKE '%' #{name} '%'
+			</if>
+			<if test="brand != null">
+				and brand LIKE '%' #{brand} '%'
+			</if>
+			<if test="func != null">
+				and func LIKE '%' #{func} '%'
+			</if>
+			<if test="hotSpots != null">
+				and hotSpots LIKE '%' #{hotSpots} '%'
+			</if>
+			<if test="type_id != null">
+				and type_id = #{type_id}
+			</if>
+			<if test="kitApp != null">
+				and kitApp=#{kitApp}
+			</if>
+			<if test="status != null">
+				and status=#{status}
+			</if>
+			<if test="productStatus != null">
+				and productStatus=#{productStatus}
+			</if>
+		</where>
+		order by price asc
+	</select>
+</mapper>
